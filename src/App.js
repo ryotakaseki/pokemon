@@ -4,36 +4,39 @@ import React from 'react';
 class App extends React.Component {
   state = {
     inputValue: '',
-    error: '',
     data: null,
-  };
-
-  // class型のコンポーネントの時はconstはいらない
-  inputChange = (event) => {
-    this.setState({
-      inputValue: event.target.value,
-    });
-  };
-
-  search = async () => {
-    try {
-      const search =
-        'https://pokeapi.co/api/v2/pokemon/' + this.state.inputValue;
-      const response = await axios.get(search);
-      const data = response.data;
-      this.setState({
-        data: data,
-      });
-      this.setState({ error: '' });
-    } catch (err) {
-      this.setState({ error: 'ポケモンの名前が間違っています！' });
-      this.setState({
-        data: null,
-      });
-    }
+    error: '',
   };
 
   render() {
+    console.log(this.state);
+    // // class型のコンポーネントの時はconstはいらない
+    const inputChange = (event) => {
+      this.setState({
+        inputValue: event.target.value,
+      });
+    };
+
+    const search = async () => {
+      // axios.getでリクエストが送られる
+      try {
+        const search =
+          'https://pokeapi.co/api/v2/pokemon/' + this.state.inputValue;
+        const response = await axios.get(search);
+        const newData = response.data;
+        this.setState({
+          data: newData,
+        });
+      } catch (err) {
+        this.setState({
+          error: 'ポケモンが存在しませんでした',
+        });
+        this.setState({
+          data: null,
+        });
+      }
+    };
+
     return (
       <div class="flex flex-col items-center">
         <div class="font-bold text-2xl text-gray-500 my-12">
@@ -44,27 +47,33 @@ class App extends React.Component {
             <input
               class="text-center w-full text-3xl p-3 border-b border-gray-100 outline-none font-sans text-gray-700"
               value={this.state.inputValue}
-              onChange={(event) => this.inputChange(event)}
+              onChange={(event) => inputChange(event)}
             />
           </div>
           <div class="my-8 flex justify-center">
             <button
-              class="mx-auto rounded-lg px-24 py-4 inline-block bg-red-500 text-white font-bold"
-              onClick={this.search}
+              class={
+                'mx-auto rounded-lg px-24 py-4 inline-block text-white font-bold bg-red-500'
+              }
+              onClick={search}
             >
               検索
             </button>
           </div>
-          <div>
-            <h2 class="text-center text-red-500 text-xl">{this.state.error}</h2>
-          </div>
         </div>
         <div>
-          {this.state.data ? <div>体重：{this.state.data.weight}</div> : null}
+          {this.state.data ? (
+            <div>
+              <div>体重：{this.state.data.weight}</div>
+              <div>タイプ：</div>
+            </div>
+          ) : (
+            <div>{this.state.error}</div>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default App;
+export { App };
