@@ -27,7 +27,7 @@ class App extends React.Component {
         this.setState({
           data: newData,
         });
-      } catch (err) {
+      } catch (error) {
         this.setState({
           error: 'ポケモンが存在しませんでした',
         });
@@ -65,7 +65,7 @@ class App extends React.Component {
           {this.state.data ? (
             <div>
               <div>体重：{this.state.data.weight}</div>
-              <div>タイプ：</div>
+              <div>タイプ：{this.state.data.types[0].type.name}</div>
             </div>
           ) : (
             <div>{this.state.error}</div>
@@ -76,4 +76,4 @@ class App extends React.Component {
   }
 }
 
-export { App };
+export default App;
