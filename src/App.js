@@ -65,7 +65,8 @@ class App extends React.Component {
           {this.state.data ? (
             <div>
               <div>体重：{this.state.data.weight}</div>
-              <div>タイプ：{this.state.data.types[0].type.name}</div>
+              <div>タイプ：{this.state.data.types[0].type.name}
+              </div>
             </div>
           ) : (
             <div>{this.state.error}</div>

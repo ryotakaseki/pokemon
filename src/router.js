@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import App from './App';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
+import Auth from  './Auth';
 
 class Router extends React.Component {
   render() {
@@ -12,7 +13,7 @@ class Router extends React.Component {
           <Route path="/login">
             <LoginPage />
              <div>
-              <Link to="/signup">新規会員登録</Link>
+              <Link to='/signup'>新規会員登録</Link>
              </div>
           </Route>
           <Route path="/signup">
@@ -23,6 +24,9 @@ class Router extends React.Component {
           </Route>
           <Route path="/zukan">
             <App />
+          </Route>
+          <Route path='/Auth'>
+            <Auth />
           </Route>
         </Switch>
       </BrowserRouter>
