@@ -1,31 +1,17 @@
 import React from "react";
-import { auth, googleAuth } from "./firebase";
 
 class Auth extends React.Component {
-  state = {
-    Email: null,
-  };
-
-  async login() {
-    try {
-      const response = await auth.signInWithPopup(googleAuth);
-      console.log(response.additionalUserInfo.profile.email);
-      const mail = response.additionalUserInfo.profile.email;
-      this.setState({
-        Email: mail,
-      });
-    } catch (err) {
-      console.log(err.err);
-    }
-  }
-
+  //renderの外はsetStateを使わないもの
+  //何度も読み込まれるから（使えないとこはないけど大変）
   render() {
     return (
-      <div>
-        <div>
-          <button onClick={this.login}>ログイン</button>
-        </div>
-        <div>{/* email:{this.state.additionalUserInfo.profile.email} */}</div>
+      <div className="w-screen h-screen flex justify-center items-center">
+        <button
+          className="bg-blue-500 text-white p-5 rounded"
+          onClick={this.props.hello}
+        >
+          Google Login
+        </button>
       </div>
     );
   }
