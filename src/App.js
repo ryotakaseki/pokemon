@@ -1,11 +1,11 @@
-import axios from 'axios';
-import React from 'react';
+import axios from "axios";
+import React from "react";
 
 class App extends React.Component {
   state = {
-    inputValue: '',
+    inputValue: "",
     data: null,
-    error: '',
+    error: "",
   };
 
   render() {
@@ -21,7 +21,7 @@ class App extends React.Component {
       // axios.getでリクエストが送られる
       try {
         const search =
-          'https://pokeapi.co/api/v2/pokemon/' + this.state.inputValue;
+          "https://pokeapi.co/api/v2/pokemon/" + this.state.inputValue;
         const response = await axios.get(search);
         const newData = response.data;
         this.setState({
@@ -29,7 +29,7 @@ class App extends React.Component {
         });
       } catch (error) {
         this.setState({
-          error: 'ポケモンが存在しませんでした',
+          error: "ポケモンが存在しませんでした",
         });
         this.setState({
           data: null,
@@ -53,7 +53,7 @@ class App extends React.Component {
           <div class="my-8 flex justify-center">
             <button
               class={
-                'mx-auto rounded-lg px-24 py-4 inline-block text-white font-bold bg-red-500'
+                "mx-auto rounded-lg px-24 py-4 inline-block text-white font-bold bg-red-500"
               }
               onClick={search}
             >
@@ -65,8 +65,7 @@ class App extends React.Component {
           {this.state.data ? (
             <div>
               <div>体重：{this.state.data.weight}</div>
-              <div>タイプ：{this.state.data.types[0].type.name}
-              </div>
+              <div>タイプ：{this.state.data.types[0].type.name}</div>
             </div>
           ) : (
             <div>{this.state.error}</div>

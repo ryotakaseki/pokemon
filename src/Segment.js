@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button,
   Divider,
@@ -7,8 +7,8 @@ import {
   Icon,
   Search,
   Segment,
-} from 'semantic-ui-react';
-import Card from './Card';
+} from "semantic-ui-react";
+import Card from "./Card";
 
 const SegmentExamplePlaceholderGrid = () => (
   <Segment placeholder>
